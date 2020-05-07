@@ -23,20 +23,38 @@
         <p>Hello fellow shoppers! We're currently building our new 
         fashion store. Add your email below to stay up-to-date with
          announcements and our launch deals.</p>
-         <form action="">
-          <div class="emailBox">
-            <input type="text" name="" placeholder="Email Address">
-            <button type="submit">
+         <form action="" onsubmit="return sendEmail(event)">
+          <div class="emailBox" id="emailBoxID">
+            <input type="text" id="textt" class="email" placeholder="Email Address">
+            <img src="images/icon-error.svg" id="iconError">
+            <button type="submit" id="buttonSendEmail">
               <img src="images/icon-arrow.svg">
             </button>
           </div>
-           
+           <p id="warningEmailText">Please provide a valid email</p>
          </form>
          
       </section>
     </main>
     <div class="photoBlock"></div>
   </div>
+
+  <script type="text/javascript">
+    function sendEmail(e){
+      e.preventDefault();
+      if(!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(document.getElementById("textt").value)){
+        document.getElementById("buttonSendEmail").style.right = "-40px";
+        document.getElementById("iconError").style.display = "block";
+        document.getElementById("emailBoxID").style.border = "2px solid var(--Soft-Red)";
+        document.getElementById("warningEmailText").style.visibility = "visible";
+      }else{
+        document.getElementById("buttonSendEmail").style.right = "0";
+        document.getElementById("iconError").style.display = "none";
+        document.getElementById("emailBoxID").style.border = "1px solid var(--Desaturated-Red)";
+        document.getElementById("warningEmailText").style.visibility = "hidden";
+      };
+    }
+  </script>
 
 </body>
 </html>
